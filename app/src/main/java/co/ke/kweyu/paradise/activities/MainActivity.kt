@@ -1,4 +1,4 @@
-package co.ke.kweyu.paradise
+package co.ke.kweyu.paradise.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +7,7 @@ import android.os.Handler
 import android.view.WindowManager
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
+import co.ke.kweyu.paradise.R
 
 class MainActivity : AppCompatActivity() {
     /**

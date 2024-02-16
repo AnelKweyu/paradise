@@ -1,12 +1,12 @@
-package co.ke.kweyu.paradise
+package co.ke.kweyu.paradise.activities
 
 import android.content.Intent
-import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.WindowManager
 import android.widget.Button
 import android.widget.TextView
+import co.ke.kweyu.paradise.R
 
 class IntroActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

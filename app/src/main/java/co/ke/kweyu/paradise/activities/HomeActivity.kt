@@ -1,30 +1,25 @@
-package co.ke.kweyu.paradise
+package co.ke.kweyu.paradise.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.WindowManager
 import android.widget.Button
-import androidx.appcompat.widget.AppCompatButton
+import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
+import co.ke.kweyu.paradise.R
 
-class SignInActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
-        //This call the parent constructor
         super.onCreate(savedInstanceState)
-        // This is used to align the xml view to this class
-        setContentView(R.layout.activity_sign_in)
+        setContentView(R.layout.activity_home)
 
-        // This is used to hide the status bar and make the splash screen as a full screen activity.
         window.setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
 
         setupActionBar()
-
-        val signInBtn: Button = findViewById(R.id.btn_sign_in)
-        signInBtn.setOnClickListener {
-        }
     }
 
     private fun setupActionBar() {
@@ -36,6 +31,7 @@ class SignInActivity : AppCompatActivity() {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true)
             actionBar.setHomeAsUpIndicator(R.drawable.ic_black_color_back_24dp)
+            actionBar.setTitle("")
         }
 
         toolbarSignInActivity.setNavigationOnClickListener { onBackPressed() }
