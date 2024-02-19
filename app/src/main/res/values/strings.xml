@@ -23,6 +23,13 @@
 
     <string name="please_click_back_again_to_exit">Please click back again to exit.</string>
     <string name="please_wait">Please Wait&#8230;</string>
+    <string name="notification">notification</string>
+    <string name="invest_now">Invest now</string>
+    <string name="your_total_asset_portfolio">Your total Asset Portfolio</string>
+    <string name="welcome_anelka">Welcome, Anelka.</string>
+    <string name="_203_935">$203,935</string>
+    <string name="best_plans">Best Plans</string>
+    <string name="see_all">See All</string>
 
 
 </resources>

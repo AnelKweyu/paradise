@@ -1,39 +1,41 @@
 package co.ke.kweyu.paradise.activities
 
-import android.content.Intent
+import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.WindowManager
-import android.widget.Button
-import android.widget.TextView
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.widget.Toolbar
 import co.ke.kweyu.paradise.R
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        window.setFlags(
-            WindowManager.LayoutParams.FLAG_FULLSCREEN,
-            WindowManager.LayoutParams.FLAG_FULLSCREEN
-        )
-
         setupActionBar()
+
+//        showProgressDialog(resources.getString(R.string.please_wait))
     }
 
     private fun setupActionBar() {
-        val toolbarSignInActivity: Toolbar = findViewById(R.id.toolbar_sign_in_activity)
+        val toolbarMembersInActivity: Toolbar = findViewById(R.id.toolbar_members_activity)
 
-        setSupportActionBar(toolbarSignInActivity)
+        setSupportActionBar(toolbarMembersInActivity)
 
         val actionBar = supportActionBar
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true)
-            actionBar.setHomeAsUpIndicator(R.drawable.ic_black_color_back_24dp)
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_action_navigation_menu)
             actionBar.setTitle("")
         }
 
-        toolbarSignInActivity.setNavigationOnClickListener { onBackPressed() }
+        toolbarMembersInActivity.setNavigationOnClickListener { onBackPressed() }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        // Inflate the menu to use in the action bar
+        menuInflater.inflate(R.menu.menu_notification, menu)
+        return super.onCreateOptionsMenu(menu)
     }
 }

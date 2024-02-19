@@ -1,10 +1,13 @@
 package co.ke.kweyu.paradise.activities
 
 import android.app.Dialog
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.util.Patterns
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -27,19 +30,14 @@ open class BaseActivity : AppCompatActivity() {
      */
 
     fun showProgressDialog(text: String) {
-        // Create the dialog instance
         mProgressDialog = Dialog(this)
 
-        // Set the content view of the dialog
         mProgressDialog.setContentView(R.layout.dialog_progress)
 
-        // Find the TextView inside the dialog layout
         val tvProgressText: TextView = mProgressDialog.findViewById(R.id.tv_progress_text)
 
-        // Set the text to the TextView
         tvProgressText.text = text
 
-        // Show the dialog
         mProgressDialog.show()
     }
 
@@ -89,12 +87,20 @@ open class BaseActivity : AppCompatActivity() {
         return password.matches(passwordRegex.toRegex())
     }
 
-    fun validateInput(value: String): Boolean {
+    fun validateFullInput(value: String): Boolean {
         val re = Regex("[A-Za-z]{3,30}")
         val arr = value.split(' ')
         if (arr.size != 2) return false
         val (firstName, lastName) = arr
         return re.matches(firstName) && re.matches(lastName)
+    }
+     fun hideSoftKeyboard() {
+        currentFocus?.let { focus ->
+            if (focus is EditText) {
+                val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(focus.windowToken, 0)
+            }
+        }
     }
 
 }

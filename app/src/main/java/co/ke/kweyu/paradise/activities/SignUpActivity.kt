@@ -49,7 +49,6 @@ class SignUpActivity : BaseActivity() {
     }
 
     private fun registerUser() {
-        // Here we get the text from editText and trim the space
         val et_name: TextView = findViewById(R.id.et_name)
         val et_email: TextView = findViewById(R.id.et_email)
         val et_password: TextView = findViewById(R.id.et_password)
@@ -57,6 +56,8 @@ class SignUpActivity : BaseActivity() {
         val name: String = et_name.text.toString().trim { it <= ' ' }
         val email: String = et_email.text.toString().trim { it <= ' ' }
         val password: String = et_password.text.toString().trim { it <= ' ' }
+
+        hideSoftKeyboard();
 
         if (validateForm(name, email, password)) {
             showProgressDialog(resources.getString(R.string.please_wait))
@@ -71,7 +72,7 @@ class SignUpActivity : BaseActivity() {
                 showErrorSnackBar("Please enter Full name.")
                 false
             }
-            !validateInput(name) -> {
+            !validateFullInput(name) -> {
                 showErrorSnackBar("Please enter at least 2 names")
                 false
             }
