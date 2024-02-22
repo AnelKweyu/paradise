@@ -30,6 +30,17 @@
     <string name="_203_935">$203,935</string>
     <string name="best_plans">Best Plans</string>
     <string name="see_all">See All</string>
+    <string name="see_all_link_arrow">See all link arrow</string>
+    <string name="_30_return">30% return</string>
+    <string name="gold">Gold</string>
+    <string name="investment_guide">Investment Guide</string>
+    <string name="basic_type_of_investments">Basic type of investments</string>
+    <string name="this_is_how_you_set_your_foot_for_2020_stock_market_recession_what_s_next">This is how you set your foot for 2020 Stock market recession. What’s next...</string>
+    <string name="horizontal_line">Horizontal Line</string>
+    <string name="home">Home</string>
+    <string name="search">Search</string>
+    <string name="transactions">Transactions</string>
+    <string name="profile">Profile</string>
 
 
 </resources>

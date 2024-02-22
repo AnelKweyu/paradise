@@ -83,6 +83,7 @@
             android:layout_marginEnd="@dimen/btn_marginStartEnd"
             android:background="@drawable/shape_button_rounded"
             android:foreground="?attr/selectableItemBackground"
+            android:textAllCaps="false"
             android:gravity="center"
             android:paddingTop="@dimen/btn_paddingTopBottom"
             android:paddingBottom="@dimen/btn_paddingTopBottom"
