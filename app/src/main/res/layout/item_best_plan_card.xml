@@ -15,14 +15,14 @@
     android:id="@+id/constraintLayoutCard"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gold_card_bg"
+    android:background="@drawable/platinum_card_bg"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintHorizontal_bias="0.0"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf='@+id/best_plan_card'>
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/planSymbol"
         android:layout_width="275dp"
         android:layout_height="226dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -30,8 +30,8 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/dolar"
-        android:contentDescription="Plan card image"/>
+        app:srcCompat="@drawable/bitcoin"
+        android:contentDescription="@string/plan_card_image"/>
 
     <TextView
         android:id="@+id/planName"
@@ -47,7 +47,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/planProfit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"

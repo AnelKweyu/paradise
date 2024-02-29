@@ -23,6 +23,7 @@ class IntroActivity : AppCompatActivity() {
 
         val signInIntroBtn: TextView = findViewById(R.id.link_sign_in_intro)
         val signUpIntroBtn: Button = findViewById(R.id.btn_sign_up_intro)
+
         signInIntroBtn.setOnClickListener {
 
             startActivity(Intent(this@IntroActivity, SignInActivity::class.java))

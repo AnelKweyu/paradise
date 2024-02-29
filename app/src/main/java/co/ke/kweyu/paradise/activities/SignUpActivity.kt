@@ -1,7 +1,6 @@
 package co.ke.kweyu.paradise.activities
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.WindowManager
@@ -106,7 +105,7 @@ class SignUpActivity : BaseActivity() {
             Toast.LENGTH_SHORT
         ).show()
         hideProgressDialog()
-        startActivity(Intent(this@SignUpActivity, HomeActivity::class.java))
+        startActivity(Intent(this@SignUpActivity, MainActivity::class.java))
         finish()
     }
 }

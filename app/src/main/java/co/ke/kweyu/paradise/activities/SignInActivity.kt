@@ -3,7 +3,6 @@ package co.ke.kweyu.paradise.activities
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Patterns
 import android.view.WindowManager
 import android.widget.Button
 import android.widget.TextView
@@ -99,7 +98,7 @@ class SignInActivity : BaseActivity() {
 
         hideProgressDialog()
 
-        startActivity(Intent(this@SignInActivity, HomeActivity::class.java))
+        startActivity(Intent(this@SignInActivity, MainActivity::class.java))
         this.finish()
     }
 }

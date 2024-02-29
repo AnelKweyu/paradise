@@ -1,34 +1,83 @@
 package co.ke.kweyu.paradise.activities
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import android.os.Handler
-import android.view.WindowManager
-import android.view.animation.AnimationUtils
-import android.widget.ImageView
-import co.ke.kweyu.paradise.R
 
-class MainActivity : AppCompatActivity() {
-    /**
-     * This function is auto created by Android when the Activity Class is created.
-     */
+import android.os.Bundle
+import android.view.Menu
+import androidx.appcompat.widget.Toolbar
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import co.ke.kweyu.paradise.R
+import co.ke.kweyu.paradise.adapters.BestPlanAdapter
+import co.ke.kweyu.paradise.adapters.InvestmentGuideAdapter
+import co.ke.kweyu.paradise.fragments.HomeFragment
+import androidx.fragment.app.Fragment
+import co.ke.kweyu.paradise.fragments.AccountFragment
+import co.ke.kweyu.paradise.fragments.SearchFragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
+
+class MainActivity : BaseActivity() {
+
+    private lateinit var bottomNavigation : BottomNavigationView
+    val homeFragment = HomeFragment()
+    val accountFragment = AccountFragment()
+    val searchFragment = SearchFragment()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        window.setFlags(
-            WindowManager.LayoutParams.FLAG_FULLSCREEN,
-            WindowManager.LayoutParams.FLAG_FULLSCREEN
-        )
+        bottomNavigation = findViewById(R.id.bottomNavigation)
 
-        val image: ImageView = findViewById(R.id.imageView)
-        val topAnim = AnimationUtils.loadAnimation(this, R.anim.top_animation)
-        image.startAnimation(topAnim)
+//        setupActionBar()
+        
+        replaceFragment(homeFragment)
 
-        Handler().postDelayed({
-            startActivity(Intent(this@MainActivity, IntroActivity::class.java))
-            finish()
-        }, 5000)
+        bottomNavigation.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.bottomNavHome -> {
+                    replaceFragment(homeFragment)
+                    return@setOnItemSelectedListener true
+                }
+                R.id.bottomNavSearch -> {
+                    replaceFragment(searchFragment)
+                    return@setOnItemSelectedListener true
+                }
+                R.id.bottomNavTransactions -> {
+                    replaceFragment(homeFragment)
+                    return@setOnItemSelectedListener true
+                }
+                R.id.bottomNavProfile -> {
+                    replaceFragment(accountFragment)
+                    return@setOnItemSelectedListener true
+                }
+
+            }
+            false
+        }
+    }
+
+    private fun replaceFragment(homeFragment: Fragment) {
+        val fragmentManager = supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.mainActivityFragmentContainerView,homeFragment)
+        fragmentTransaction.commit()
+    }
+
+    private fun setupActionBar() {
+        val toolbarMainActivity: Toolbar = findViewById(R.id.toolbarMainActivity)
+
+        setSupportActionBar(toolbarMainActivity)
+
+        val actionBar = supportActionBar
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true)
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_action_navigation_menu)
+            actionBar.setTitle("")
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_notification, menu)
+        return super.onCreateOptionsMenu(menu)
     }
 }

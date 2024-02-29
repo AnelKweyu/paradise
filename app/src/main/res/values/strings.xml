@@ -35,12 +35,45 @@
     <string name="gold">Gold</string>
     <string name="investment_guide">Investment Guide</string>
     <string name="basic_type_of_investments">Basic type of investments</string>
+    <string name="how_much_can_you_start_wit">How much can you start wit..</string>
     <string name="this_is_how_you_set_your_foot_for_2020_stock_market_recession_what_s_next">This is how you set your foot for 2020 Stock market recession. What’s next...</string>
+    <string name="what_do_you_like_to_see_Its_a_very_different_market_from_2018_The_way">What do you like to see? It\'s a very different market from 2018. The way...</string>
     <string name="horizontal_line">Horizontal Line</string>
     <string name="home">Home</string>
     <string name="search">Search</string>
     <string name="transactions">Transactions</string>
     <string name="profile">Profile</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="plan_card_image">Plan card image</string>
+    <string name="profile_title">Profile</string>
+    <string name="profile_image">Profile image</string>
+    <string name="anelka_kweyu">Anelka Kweyu</string>
+    <string name="expert">Expert</string>
+    <string name="contact_info">Contact Info</string>
+    <string name="contact_info_icon_forward">contact info icon Forward</string>
+    <string name="source_of_funding_info">Source of Funding Info</string>
+    <string name="contact_info_icon">contact info icon</string>
+    <string name="settings_icon_forward">settings icon forward</string>
+    <string name="settings">Settings</string>
+    <string name="settings_icon">settings icon</string>
+    <string name="document_info_icon">document info icon</string>
+    <string name="document_info">Document Info</string>
+    <string name="document_info_icon_forward">document info icon forward</string>
+    <string name="bank_account_info_icon">bank account info icon</string>
+    <string name="bank_account_info">Bank Account Info</string>
+    <string name="bank_account_info_icon_forward">bank account info icon forward</string>
+    <string name="contact_info_iconb">contact info iconb</string>
+    <string name="profile_image_edit">profile image edit</string>
+    <string name="edit_pen_icon">edit pen icon</string>
+    <string name="edit_name">Edit name</string>
+    <string name="edit_gender">Edit Gender</string>
+    <string name="edit_phone_number">Edit Phone Number</string>
+    <string name="notification_title">Notification</string>
+    <string name="apple_stock_just_increased_check_it_out_now">Apple stock just increased. Check it out now.</string>
+    <string name="_15min_ago">15min ago</string>
+    <string name="verticle_elipse">verticle elipse</string>
+    <string name="bank_of_africa_0102907xxx">Bank of Africa - 0102907xxx</string>
 
 
 </resources>
