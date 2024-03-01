@@ -1,7 +1,11 @@
 package co.ke.kweyu.paradise.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
@@ -13,17 +17,16 @@ import co.ke.kweyu.paradise.adapters.InvestmentGuideAdapter
 import co.ke.kweyu.paradise.enums.PlanEnum
 import co.ke.kweyu.paradise.models.Guide
 import co.ke.kweyu.paradise.models.Plan
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import co.ke.kweyu.paradise.activities.NotificationActivity
+import co.ke.kweyu.paradise.activities.SignInActivity
 
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
-
-
-
-
-
 /**
  * A simple [Fragment] subclass.
  * Use the [HomeFragment.newInstance] factory method to
@@ -55,135 +58,170 @@ class HomeFragment : Fragment() {
             param2 = it.getString(ARG_PARAM2)
         }
     }
+    override fun onCreateView(
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
+        ): View? {
+            val homeFragmentView: View = inflater.inflate(R.layout.fragment_home, container, false)
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View {
-        val homeFragmentView: View = inflater.inflate(R.layout.fragment_home, container, false)
+            // Call function to initialize data
+            planCardDataInitialize()
+            investmentGuideDataInitialize()
 
-        planCardDataInitialize()
+            // Set up toolbar
+            val toolbar: Toolbar = homeFragmentView.findViewById(R.id.toolbarHomeFragment)
+            (activity as? AppCompatActivity)?.setSupportActionBar(toolbar)
+            (activity as? AppCompatActivity)?.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+            (activity as? AppCompatActivity)?.supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_action_navigation_menu)
+            (activity as? AppCompatActivity)?.supportActionBar?.title = ""
 
+            bestPlanRecyclerView = homeFragmentView.findViewById(R.id.rv_best_plan)
+            bestPlanRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            bestPlanRecyclerView.setHasFixedSize(true)
+            bestPlanAdapter = BestPlanAdapter(plansArrayList)
+            bestPlanRecyclerView.adapter = bestPlanAdapter
 
-        bestPlanRecyclerView = homeFragmentView.findViewById(R.id.rv_best_plan)
-        bestPlanRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        bestPlanRecyclerView.setHasFixedSize(true)
-        bestPlanAdapter = BestPlanAdapter(plansArrayList)
-        bestPlanRecyclerView.adapter = bestPlanAdapter
+            investmentGuideRecyclerView = homeFragmentView.findViewById(R.id.rv_investment_guide)
+            investmentGuideRecyclerView.layoutManager = LinearLayoutManager(context)
+            investmentGuideRecyclerView.setHasFixedSize(true)
+            investmentGuideAdapter = InvestmentGuideAdapter(investmentGuidesArrayList)
+            investmentGuideRecyclerView.adapter = investmentGuideAdapter
 
-        investmentGuideDataInitialize()
+        setHasOptionsMenu(true)
 
-        investmentGuideRecyclerView = homeFragmentView.findViewById(R.id.rv_investment_guide)
-        investmentGuideRecyclerView.layoutManager = LinearLayoutManager(context)
-        investmentGuideRecyclerView.setHasFixedSize(true)
-        investmentGuideAdapter = InvestmentGuideAdapter(investmentGuidesArrayList)
-        investmentGuideRecyclerView.adapter = investmentGuideAdapter
 
         return homeFragmentView
-    }
+        }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment HomeFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic fun newInstance(param1: String, param2: String) =
+
+        companion object {
+            /**
+             * Use this factory method to create a new instance of
+             * this fragment using the provided parameters.
+             *
+             * @param param1 Parameter 1.
+             * @param param2 Parameter 2.
+             * @return A new instance of fragment HomeFragment.
+             */
+            // TODO: Rename and change types and number of parameters
+            @JvmStatic
+            fun newInstance(param1: String, param2: String) =
                 HomeFragment().apply {
                     arguments = Bundle().apply {
                         putString(ARG_PARAM1, param1)
                         putString(ARG_PARAM2, param2)
                     }
                 }
-    }
-
-    private fun planCardDataInitialize(){
-        plansArrayList = arrayListOf()
-
-        planTypes = arrayOf(
-            PlanEnum.Platinum,
-            PlanEnum.Gold,
-            PlanEnum.Silver,
-            PlanEnum.Bronze
-        )
-
-        planProfits = arrayOf(
-            90, 60, 30, 15
-        )
-
-        for (i in planTypes.indices){
-            val plan = Plan(planTypes[i],planProfits[i])
-            plansArrayList.add(plan)
         }
 
-    }
+        private fun planCardDataInitialize() {
+            plansArrayList = arrayListOf()
 
-    private fun investmentGuideDataInitialize(){
-        investmentGuidesArrayList = arrayListOf()
+            planTypes = arrayOf(
+                PlanEnum.Platinum,
+                PlanEnum.Gold,
+                PlanEnum.Silver,
+                PlanEnum.Bronze
+            )
 
-        investmentGuideTitles = arrayOf(
-            getString(R.string.basic_type_of_investments),
-            getString(R.string.how_much_can_you_start_wit),
-            getString(R.string.basic_type_of_investments),
-            getString(R.string.how_much_can_you_start_wit),
-            getString(R.string.basic_type_of_investments),
-            getString(R.string.how_much_can_you_start_wit),
-            getString(R.string.basic_type_of_investments),
-            getString(R.string.how_much_can_you_start_wit),
-            getString(R.string.basic_type_of_investments),
-            getString(R.string.how_much_can_you_start_wit),
-            getString(R.string.basic_type_of_investments),
-            getString(R.string.how_much_can_you_start_wit),
-            getString(R.string.basic_type_of_investments),
-            getString(R.string.how_much_can_you_start_wit),
-            getString(R.string.basic_type_of_investments),
-            getString(R.string.how_much_can_you_start_wit)
-        )
+            planProfits = arrayOf(
+                90, 60, 30, 15
+            )
 
-        investmentGuidesDescriptions = arrayOf(
-            getString(R.string.this_is_how_you_set_your_foot_for_2020_stock_market_recession_what_s_next),
-            getString(R.string.what_do_you_like_to_see_Its_a_very_different_market_from_2018_The_way),
-            getString(R.string.this_is_how_you_set_your_foot_for_2020_stock_market_recession_what_s_next),
-            getString(R.string.what_do_you_like_to_see_Its_a_very_different_market_from_2018_The_way),
-            getString(R.string.this_is_how_you_set_your_foot_for_2020_stock_market_recession_what_s_next),
-            getString(R.string.what_do_you_like_to_see_Its_a_very_different_market_from_2018_The_way),
-            getString(R.string.this_is_how_you_set_your_foot_for_2020_stock_market_recession_what_s_next),
-            getString(R.string.what_do_you_like_to_see_Its_a_very_different_market_from_2018_The_way),
-            getString(R.string.this_is_how_you_set_your_foot_for_2020_stock_market_recession_what_s_next),
-            getString(R.string.what_do_you_like_to_see_Its_a_very_different_market_from_2018_The_way),
-            getString(R.string.this_is_how_you_set_your_foot_for_2020_stock_market_recession_what_s_next),
-            getString(R.string.what_do_you_like_to_see_Its_a_very_different_market_from_2018_The_way),
-            getString(R.string.this_is_how_you_set_your_foot_for_2020_stock_market_recession_what_s_next),
-            getString(R.string.what_do_you_like_to_see_Its_a_very_different_market_from_2018_The_way),
-            getString(R.string.this_is_how_you_set_your_foot_for_2020_stock_market_recession_what_s_next),
-            getString(R.string.what_do_you_like_to_see_Its_a_very_different_market_from_2018_The_way)
-        )
+            for (i in planTypes.indices) {
+                val plan = Plan(planTypes[i], planProfits[i])
+                plansArrayList.add(plan)
+            }
 
-        investmentGuideImages = arrayOf(
-            R.drawable.tende_logo,
-            R.drawable.kocela,
-            R.drawable.tende_logo,
-            R.drawable.kocela,
-            R.drawable.tende_logo,
-            R.drawable.kocela,
-            R.drawable.tende_logo,
-            R.drawable.kocela,
-            R.drawable.tende_logo,
-            R.drawable.kocela,
-            R.drawable.tende_logo,
-            R.drawable.kocela,
-            R.drawable.tende_logo,
-            R.drawable.kocela,
-            R.drawable.tende_logo,
-            R.drawable.kocela
-        )
-
-        for (i in investmentGuideTitles.indices){
-            val guide = Guide(investmentGuideTitles[i],investmentGuidesDescriptions[i],investmentGuideImages[i])
-            investmentGuidesArrayList.add(guide)
         }
 
+        private fun investmentGuideDataInitialize() {
+            investmentGuidesArrayList = arrayListOf()
+
+            investmentGuideTitles = arrayOf(
+                getString(R.string.basic_type_of_investments),
+                getString(R.string.how_much_can_you_start_wit),
+                getString(R.string.basic_type_of_investments),
+                getString(R.string.how_much_can_you_start_wit),
+                getString(R.string.basic_type_of_investments),
+                getString(R.string.how_much_can_you_start_wit),
+                getString(R.string.basic_type_of_investments),
+                getString(R.string.how_much_can_you_start_wit),
+                getString(R.string.basic_type_of_investments),
+                getString(R.string.how_much_can_you_start_wit),
+                getString(R.string.basic_type_of_investments),
+                getString(R.string.how_much_can_you_start_wit),
+                getString(R.string.basic_type_of_investments),
+                getString(R.string.how_much_can_you_start_wit),
+                getString(R.string.basic_type_of_investments),
+                getString(R.string.how_much_can_you_start_wit)
+            )
+
+            investmentGuidesDescriptions = arrayOf(
+                getString(R.string.this_is_how_you_set_your_foot_for_2020_stock_market_recession_what_s_next),
+                getString(R.string.what_do_you_like_to_see_Its_a_very_different_market_from_2018_The_way),
+                getString(R.string.this_is_how_you_set_your_foot_for_2020_stock_market_recession_what_s_next),
+                getString(R.string.what_do_you_like_to_see_Its_a_very_different_market_from_2018_The_way),
+                getString(R.string.this_is_how_you_set_your_foot_for_2020_stock_market_recession_what_s_next),
+                getString(R.string.what_do_you_like_to_see_Its_a_very_different_market_from_2018_The_way),
+                getString(R.string.this_is_how_you_set_your_foot_for_2020_stock_market_recession_what_s_next),
+                getString(R.string.what_do_you_like_to_see_Its_a_very_different_market_from_2018_The_way),
+                getString(R.string.this_is_how_you_set_your_foot_for_2020_stock_market_recession_what_s_next),
+                getString(R.string.what_do_you_like_to_see_Its_a_very_different_market_from_2018_The_way),
+                getString(R.string.this_is_how_you_set_your_foot_for_2020_stock_market_recession_what_s_next),
+                getString(R.string.what_do_you_like_to_see_Its_a_very_different_market_from_2018_The_way),
+                getString(R.string.this_is_how_you_set_your_foot_for_2020_stock_market_recession_what_s_next),
+                getString(R.string.what_do_you_like_to_see_Its_a_very_different_market_from_2018_The_way),
+                getString(R.string.this_is_how_you_set_your_foot_for_2020_stock_market_recession_what_s_next),
+                getString(R.string.what_do_you_like_to_see_Its_a_very_different_market_from_2018_The_way)
+            )
+
+            investmentGuideImages = arrayOf(
+                R.drawable.tende_logo,
+                R.drawable.kocela,
+                R.drawable.tende_logo,
+                R.drawable.kocela,
+                R.drawable.tende_logo,
+                R.drawable.kocela,
+                R.drawable.tende_logo,
+                R.drawable.kocela,
+                R.drawable.tende_logo,
+                R.drawable.kocela,
+                R.drawable.tende_logo,
+                R.drawable.kocela,
+                R.drawable.tende_logo,
+                R.drawable.kocela,
+                R.drawable.tende_logo,
+                R.drawable.kocela
+            )
+
+            for (i in investmentGuideTitles.indices) {
+                val guide = Guide(
+                    investmentGuideTitles[i],
+                    investmentGuidesDescriptions[i],
+                    investmentGuideImages[i]
+                )
+                investmentGuidesArrayList.add(guide)
+            }
+
+        }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_notification, menu)
+        super.onCreateOptionsMenu(menu, inflater)
     }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_notification -> {
+                startActivity(Intent(requireActivity(), NotificationActivity::class.java))
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
 }
+
+

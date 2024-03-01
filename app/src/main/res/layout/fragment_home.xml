@@ -9,8 +9,10 @@
     tools:context=".fragments.HomeFragment">
 
     <include
-        android:id="@+id/toolbar_home_fragment"
+        android:id="@+id/toolbarHomeFragment"
         layout="@layout/top_toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
@@ -20,7 +22,7 @@
         android:fillViewport="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_home_fragment">
+        app:layout_constraintTop_toBottomOf="@+id/toolbarHomeFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -32,7 +34,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="@dimen/lets_get_started_text_marginTop"
                 android:fontFamily="@font/dmsans_bold"
                 android:text="@string/welcome_anelka"
                 android:textColor="@color/primary_text_color"
@@ -204,7 +205,6 @@
                     android:id="@+id/investConstraintlayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

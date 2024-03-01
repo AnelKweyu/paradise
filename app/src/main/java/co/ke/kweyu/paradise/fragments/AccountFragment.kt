@@ -1,11 +1,19 @@
 package co.ke.kweyu.paradise.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.constraintlayout.widget.ConstraintLayout
 import co.ke.kweyu.paradise.R
+import co.ke.kweyu.paradise.activities.BankAccountInfoActivity
+import co.ke.kweyu.paradise.activities.EditProfileActivity
+import co.ke.kweyu.paradise.fragments.HomeFragment
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,7 +43,35 @@ class AccountFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_account, container, false)
+        val accountFragmentView: View = inflater.inflate(R.layout.fragment_account, container, false)
+
+        val toolbar: Toolbar = accountFragmentView.findViewById(R.id.toolbarAccountFragment)
+        (activity as? AppCompatActivity)?.setSupportActionBar(toolbar)
+        (activity as? AppCompatActivity)?.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        (activity as? AppCompatActivity)?.supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_black_color_back_24dp)
+        (activity as? AppCompatActivity)?.supportActionBar?.title = ""
+
+        val contactInfoBtn: ConstraintLayout = accountFragmentView.findViewById(R.id.contactInfoBtn)
+        val bankAccountInfoBtn: ConstraintLayout = accountFragmentView.findViewById(R.id.bankAccountInfoBtn)
+
+        contactInfoBtn.setOnClickListener {
+            startActivity(Intent(requireActivity(), EditProfileActivity::class.java))
+        }
+        bankAccountInfoBtn.setOnClickListener {
+            startActivity(Intent(requireActivity(), BankAccountInfoActivity::class.java))
+        }
+
+        toolbar.setNavigationOnClickListener {
+            replaceFragment(HomeFragment())
+        }
+        return accountFragmentView
+    }
+
+    private fun replaceFragment(homeFragment: Fragment) {
+        val fragmentManager = childFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.mainActivityFragmentContainerView,homeFragment)
+        fragmentTransaction.commit()
     }
 
     companion object {

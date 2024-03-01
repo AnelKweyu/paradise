@@ -18,7 +18,6 @@ class SignInActivity : BaseActivity() {
         // This is used to align the xml view to this class
         setContentView(R.layout.activity_sign_in)
 
-        // This is used to hide the status bar and make the splash screen as a full screen activity.
         window.setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN
@@ -92,7 +91,7 @@ class SignInActivity : BaseActivity() {
     fun signInSuccess(user: User) {
         Toast.makeText(
             this@SignInActivity,
-            "You have successfully registered.",
+            "You have successfully Signed In.",
             Toast.LENGTH_SHORT
         ).show()
 

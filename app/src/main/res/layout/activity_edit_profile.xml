@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarEditProfile"
+        app:layout_constraintTop_toBottomOf="@id/toolbarEditProfile"
         app:layout_constraintStart_toStartOf="parent">
 
         <de.hdodenhof.circleimageview.CircleImageView

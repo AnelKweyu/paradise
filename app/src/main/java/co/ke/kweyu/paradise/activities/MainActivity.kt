@@ -2,13 +2,7 @@ package co.ke.kweyu.paradise.activities
 
 
 import android.os.Bundle
-import android.view.Menu
-import androidx.appcompat.widget.Toolbar
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import co.ke.kweyu.paradise.R
-import co.ke.kweyu.paradise.adapters.BestPlanAdapter
-import co.ke.kweyu.paradise.adapters.InvestmentGuideAdapter
 import co.ke.kweyu.paradise.fragments.HomeFragment
 import androidx.fragment.app.Fragment
 import co.ke.kweyu.paradise.fragments.AccountFragment
@@ -18,9 +12,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 class MainActivity : BaseActivity() {
 
     private lateinit var bottomNavigation : BottomNavigationView
-    val homeFragment = HomeFragment()
-    val accountFragment = AccountFragment()
-    val searchFragment = SearchFragment()
+    private lateinit var currentFragment: Fragment
+
+    private val homeFragment = HomeFragment()
+    private val accountFragment = AccountFragment()
+    private val searchFragment = SearchFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,26 +24,31 @@ class MainActivity : BaseActivity() {
 
         bottomNavigation = findViewById(R.id.bottomNavigation)
 
-//        setupActionBar()
-        
         replaceFragment(homeFragment)
+        currentFragment = homeFragment
+
+
 
         bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.bottomNavHome -> {
                     replaceFragment(homeFragment)
+                    currentFragment = homeFragment
                     return@setOnItemSelectedListener true
                 }
                 R.id.bottomNavSearch -> {
                     replaceFragment(searchFragment)
+                    currentFragment = searchFragment
                     return@setOnItemSelectedListener true
                 }
                 R.id.bottomNavTransactions -> {
                     replaceFragment(homeFragment)
+                    currentFragment = homeFragment
                     return@setOnItemSelectedListener true
                 }
                 R.id.bottomNavProfile -> {
                     replaceFragment(accountFragment)
+                    currentFragment = accountFragment
                     return@setOnItemSelectedListener true
                 }
 
@@ -63,21 +64,7 @@ class MainActivity : BaseActivity() {
         fragmentTransaction.commit()
     }
 
-    private fun setupActionBar() {
-        val toolbarMainActivity: Toolbar = findViewById(R.id.toolbarMainActivity)
 
-        setSupportActionBar(toolbarMainActivity)
-
-        val actionBar = supportActionBar
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true)
-            actionBar.setHomeAsUpIndicator(R.drawable.ic_action_navigation_menu)
-            actionBar.setTitle("")
-        }
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_notification, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
 }
+
+

@@ -20,7 +20,7 @@
     
     <style name="roundedNotificationCorners" parent="">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">20dp</item>
+        <item name="cornerSize">20%</item>
     </style>
 
     <style name="roundedNotificationCorners4" parent="">
