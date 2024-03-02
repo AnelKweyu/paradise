@@ -27,7 +27,7 @@
             android:layout_width="@dimen/my_profile_user_image_size"
             android:layout_height="@dimen/my_profile_user_image_size"
             android:contentDescription="@string/profile_image_edit"
-            android:src="@drawable/ic_user_place_holder"
+            android:src="@drawable/kobbie"
             android:layout_gravity="center"/>
         <View
             android:id="@+id/viewOverlay"
@@ -41,8 +41,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@drawable/edit_pen_icon"
-            android:contentDescription="@string/edit_pen_icon"/>
+            android:contentDescription="@string/edit_pen_icon"
+            android:src="@drawable/edit_pen_icon" />
 
     </FrameLayout>
 

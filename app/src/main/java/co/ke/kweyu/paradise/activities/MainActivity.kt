@@ -1,8 +1,8 @@
 package co.ke.kweyu.paradise.activities
 
-
 import android.os.Bundle
 import co.ke.kweyu.paradise.R
+import co.ke.kweyu.paradise.databinding.ActivityMainBinding
 import co.ke.kweyu.paradise.fragments.HomeFragment
 import androidx.fragment.app.Fragment
 import co.ke.kweyu.paradise.fragments.AccountFragment
@@ -11,7 +11,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : BaseActivity() {
 
-    private lateinit var bottomNavigation : BottomNavigationView
+    private lateinit var binding: ActivityMainBinding
+    private lateinit var bottomNavigation: BottomNavigationView
     private lateinit var currentFragment: Fragment
 
     private val homeFragment = HomeFragment()
@@ -20,14 +21,13 @@ class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        bottomNavigation = findViewById(R.id.bottomNavigation)
+        bottomNavigation = binding.bottomNavigation
 
         replaceFragment(homeFragment)
         currentFragment = homeFragment
-
-
 
         bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
@@ -51,7 +51,6 @@ class MainActivity : BaseActivity() {
                     currentFragment = accountFragment
                     return@setOnItemSelectedListener true
                 }
-
             }
             false
         }
@@ -60,11 +59,7 @@ class MainActivity : BaseActivity() {
     private fun replaceFragment(homeFragment: Fragment) {
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.mainActivityFragmentContainerView,homeFragment)
+        fragmentTransaction.replace(binding.mainActivityFragmentContainerView.id, homeFragment)
         fragmentTransaction.commit()
     }
-
-
 }
-
-

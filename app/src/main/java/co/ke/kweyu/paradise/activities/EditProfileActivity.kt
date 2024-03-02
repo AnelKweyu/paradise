@@ -1,30 +1,35 @@
 package co.ke.kweyu.paradise.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import co.ke.kweyu.paradise.databinding.ActivityEditProfileBinding
 import androidx.appcompat.widget.Toolbar
 import co.ke.kweyu.paradise.R
 
 class EditProfileActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityEditProfileBinding
+    private lateinit var toolbar: Toolbar
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_edit_profile)
+        binding = ActivityEditProfileBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         setupActionBar()
     }
 
     private fun setupActionBar() {
-        val toolbarEditProfile: Toolbar = findViewById(R.id.toolbarEditProfile)
-
-        setSupportActionBar(toolbarEditProfile)
+        toolbar = binding.toolbarEditProfile.toolbarLayout
+        setSupportActionBar(toolbar)
 
         val actionBar = supportActionBar
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true)
             actionBar.setHomeAsUpIndicator(R.drawable.ic_black_color_back_24dp)
-            actionBar.setTitle("Contact info")
+            actionBar.title = "Contact info"
         }
 
-        toolbarEditProfile.setNavigationOnClickListener { onBackPressed() }
+        toolbar.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
     }
 }

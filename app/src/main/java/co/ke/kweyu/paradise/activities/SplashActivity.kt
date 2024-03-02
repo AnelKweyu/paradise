@@ -1,34 +1,50 @@
 package co.ke.kweyu.paradise.activities
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
-import android.view.WindowManager
+import android.view.View
+import android.view.WindowInsets
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
+import androidx.appcompat.app.AppCompatActivity
 import co.ke.kweyu.paradise.R
+import co.ke.kweyu.paradise.databinding.ActivitySplashBinding
 
 class SplashActivity : AppCompatActivity() {
-    /**
-     * This function is auto created by Android when the Activity Class is created.
-     */
+
+    private lateinit var binding: ActivitySplashBinding
+    private lateinit var imageView: ImageView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash)
+        binding = ActivitySplashBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        window.setFlags(
-            WindowManager.LayoutParams.FLAG_FULLSCREEN,
-            WindowManager.LayoutParams.FLAG_FULLSCREEN
-        )
+        makeActivityFullscreen()
 
-        val image: ImageView = findViewById(R.id.splashImage)
+        imageView = binding.splashImage
         val topAnim = AnimationUtils.loadAnimation(this, R.anim.top_animation)
-        image.startAnimation(topAnim)
+        imageView.startAnimation(topAnim)
 
-        Handler().postDelayed({
+        Handler(mainLooper).postDelayed({
             startActivity(Intent(this@SplashActivity, IntroActivity::class.java))
             finish()
         }, 5000)
+
+    }
+
+    @Suppress("DEPRECATION")
+    private fun makeActivityFullscreen() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.insetsController?.hide(WindowInsets.Type.statusBars() or WindowInsets.Type.navigationBars())
+        } else {
+            window.decorView.systemUiVisibility = (
+                    View.SYSTEM_UI_FLAG_FULLSCREEN or
+                            View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or
+                            View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                    )
+        }
     }
 }

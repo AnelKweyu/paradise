@@ -8,11 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.constraintlayout.widget.ConstraintLayout
 import co.ke.kweyu.paradise.R
 import co.ke.kweyu.paradise.activities.BankAccountInfoActivity
 import co.ke.kweyu.paradise.activities.EditProfileActivity
-import co.ke.kweyu.paradise.fragments.HomeFragment
+import co.ke.kweyu.paradise.databinding.FragmentAccountBinding
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -38,34 +37,40 @@ class AccountFragment : Fragment() {
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        val accountFragmentView: View = inflater.inflate(R.layout.fragment_account, container, false)
+    class AccountFragment : Fragment() {
 
-        val toolbar: Toolbar = accountFragmentView.findViewById(R.id.toolbarAccountFragment)
-        (activity as? AppCompatActivity)?.setSupportActionBar(toolbar)
-        (activity as? AppCompatActivity)?.supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        (activity as? AppCompatActivity)?.supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_black_color_back_24dp)
-        (activity as? AppCompatActivity)?.supportActionBar?.title = ""
+        private lateinit var binding: FragmentAccountBinding
+        private lateinit var toolbar: Toolbar
 
-        val contactInfoBtn: ConstraintLayout = accountFragmentView.findViewById(R.id.contactInfoBtn)
-        val bankAccountInfoBtn: ConstraintLayout = accountFragmentView.findViewById(R.id.bankAccountInfoBtn)
+        override fun onCreateView(
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
+        ): View? {
+            // Inflate the layout using ViewBinding
+            binding = FragmentAccountBinding.inflate(inflater, container, false)
+            val accountFragmentView = binding.root
 
-        contactInfoBtn.setOnClickListener {
-            startActivity(Intent(requireActivity(), EditProfileActivity::class.java))
+            // Set up the toolbar
+            toolbar = binding.toolbarAccountFragment.toolbarLayout
+            (requireActivity() as? AppCompatActivity)?.setSupportActionBar(toolbar)
+            (requireActivity() as? AppCompatActivity)?.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+            (requireActivity() as? AppCompatActivity)?.supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_black_color_back_24dp)
+            (requireActivity() as? AppCompatActivity)?.supportActionBar?.title = ""
+
+            // Set up click listeners
+            binding.contactInfoBtn.setOnClickListener {
+                startActivity(Intent(requireActivity(), EditProfileActivity::class.java))
+            }
+            binding.bankAccountInfoBtn.setOnClickListener {
+                startActivity(Intent(requireActivity(), BankAccountInfoActivity::class.java))
+            }
+
+            toolbar.setNavigationOnClickListener {
+                replaceFragment(HomeFragment())
+            }
+
+            return accountFragmentView
         }
-        bankAccountInfoBtn.setOnClickListener {
-            startActivity(Intent(requireActivity(), BankAccountInfoActivity::class.java))
-        }
-
-        toolbar.setNavigationOnClickListener {
-            replaceFragment(HomeFragment())
-        }
-        return accountFragmentView
-    }
 
     private fun replaceFragment(homeFragment: Fragment) {
         val fragmentManager = childFragmentManager
@@ -93,4 +98,5 @@ class AccountFragment : Fragment() {
                 }
             }
     }
+}
 }
