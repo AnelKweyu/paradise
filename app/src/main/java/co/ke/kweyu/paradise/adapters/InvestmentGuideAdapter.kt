@@ -13,13 +13,12 @@ open class InvestmentGuideAdapter(
     private var investmentGuideList: ArrayList<Guide>
 ) : RecyclerView.Adapter<InvestmentGuideAdapter.InvestmentGuideViewHolder>()  {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): InvestmentGuideViewHolder {
-        return InvestmentGuideViewHolder(
-            LayoutInflater.from(parent.context).inflate(
-                R.layout.item_investment_guide,
-                parent,
-                false
-            )
+        val view =           LayoutInflater.from(parent.context).inflate(
+            R.layout.item_investment_guide,
+            parent,
+            false
         )
+        return InvestmentGuideViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: InvestmentGuideViewHolder, position: Int) {
