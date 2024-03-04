@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import co.ke.kweyu.paradise.R
-import co.ke.kweyu.paradise.databinding.ActivityMainBinding
+import co.ke.kweyu.paradise.databinding.ActivityPlayGroundBinding
 import co.ke.kweyu.paradise.fragments.AccountFragment
 import co.ke.kweyu.paradise.fragments.HomeFragment
 import co.ke.kweyu.paradise.fragments.SearchFragment
@@ -13,12 +13,12 @@ import java.util.Deque
 import java.util.ArrayDeque
 
 
-class MainActivity : BaseActivity() {
+class PlayGroundActivity : BaseActivity() {
 
     private var deque: Deque<Int> = ArrayDeque<Int>(4)
     private var flag = true
 
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityPlayGroundBinding
     private lateinit var bottomNavigation: BottomNavigationView
 
     private lateinit var currentFragment: Fragment
@@ -28,7 +28,7 @@ class MainActivity : BaseActivity() {
     private val searchFragment = SearchFragment()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityPlayGroundBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         bottomNavigation = binding.bottomNavigation
@@ -95,7 +95,7 @@ class MainActivity : BaseActivity() {
     private fun loadFragment(fragment: Fragment) {
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(binding.mainActivityFragmentContainerView.id, fragment)
+        fragmentTransaction.replace(binding.playGroundActivityFragmentContainerView.id, fragment)
         fragmentTransaction.commit()
     }
 

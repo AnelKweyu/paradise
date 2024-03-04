@@ -29,6 +29,10 @@ class AccountFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+
+    private lateinit var binding: FragmentAccountBinding
+    private lateinit var toolbar: Toolbar
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -36,13 +40,7 @@ class AccountFragment : Fragment() {
             param2 = it.getString(ARG_PARAM2)
         }
     }
-
-    class AccountFragment : Fragment() {
-
-        private lateinit var binding: FragmentAccountBinding
-        private lateinit var toolbar: Toolbar
-
-        override fun onCreateView(
+    override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
         ): View? {
@@ -65,19 +63,12 @@ class AccountFragment : Fragment() {
                 startActivity(Intent(requireActivity(), BankAccountInfoActivity::class.java))
             }
 
-            toolbar.setNavigationOnClickListener {
-                replaceFragment(HomeFragment())
-            }
+            toolbar.setNavigationOnClickListener { requireActivity().onBackPressedDispatcher.onBackPressed()}
 
             return accountFragmentView
         }
 
-    private fun replaceFragment(homeFragment: Fragment) {
-        val fragmentManager = childFragmentManager
-        val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.mainActivityFragmentContainerView,homeFragment)
-        fragmentTransaction.commit()
-    }
+
 
     companion object {
         /**
@@ -98,5 +89,4 @@ class AccountFragment : Fragment() {
                 }
             }
     }
-}
 }
