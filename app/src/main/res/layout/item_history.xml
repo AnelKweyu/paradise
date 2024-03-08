@@ -4,48 +4,46 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/tvGuide"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="2dp">
+    android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/textViewGuideTitle"
+        android:id="@+id/historyRetailPriceText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:fontFamily="@font/sfprodisplayblackbold"
-        android:text="@string/basic_type_of_investments"
-        android:textColor="#4F4F4F"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/textViewGuideDetails"
+        android:text="@string/rp_200_000"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/historyOwnershipText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textViewGuideDetails"
+        android:id="@+id/historyOwnershipText"
         android:layout_width="260dp"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="16dp"
         android:fontFamily="@font/sfprodisplayregular"
-        android:text="@string/this_is_how_you_set_your_foot_for_2020_stock_market_recession_what_s_next"
-        android:textColor="#4F4F4F"
+        android:text="@string/buy_kocela_stock"
+        android:textColor="#B3B3B3"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewGuideTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/historyRetailPriceText" />
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/ivGuideImage"
-        android:layout_width="@dimen/item_member_member_image_size"
-        android:layout_height="@dimen/item_member_member_image_size"
-        android:contentDescription="@string/image_contentDescription"
-        android:src="@drawable/tende_logo"
-        app:civ_border_color="@color/primary_text_color"
-        app:civ_border_width="@dimen/item_member_image_circular_width_size"
-        app:layout_constraintBottom_toTopOf="@+id/horizontalRule"
+    <TextView
+        android:id="@+id/historyDateText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="@font/sfprodisplayregular"
+        android:text="@string/wed_6_mar_2024"
+        android:textColor="#B3B3B3"
+        android:textSize="17sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"/>
+        app:layout_constraintBottom_toBottomOf="parent" />
+
 
 
     <View
@@ -59,6 +57,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewGuideDetails" />
+        app:layout_constraintTop_toBottomOf="@+id/historyOwnershipText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

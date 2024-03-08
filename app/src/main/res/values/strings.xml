@@ -74,6 +74,20 @@
     <string name="_15min_ago">15min ago</string>
     <string name="verticle_elipse">verticle elipse</string>
     <string name="bank_of_africa_0102907xxx">Bank of Africa - 0102907xxx</string>
+    <string name="_2">+2%</string>
+    <string name="current_plans">Current Plans</string>
+    <string name="see_all_plans">See All Plans</string>
+    <string name="history">History</string>
+    <string name="rp_200_000">Rp 200.000</string>
+    <string name="rp_150_000">Rp 150.000</string>
+    <string name="rp_1_000_240">Rp 1.000.240</string>
+
+    <string name="buy_kocela_stock">Buy Kocela stock</string>
+    <string name="sell_kplc_stock">Sell Kplc stock</string>
+    <string name="buy_tende_stock">Buy Tende stock</string>
+    <string name="sell_bat_stock">Sell Bat stock</string>
+
+    <string name="wed_6_mar_2024">WED 6 Mar 2024</string>
 
 
 </resources>

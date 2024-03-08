@@ -109,7 +109,7 @@ class SignInActivity : BaseActivity() {
 
         hideProgressDialog()
 
-        startActivity(Intent(this@SignInActivity, PlayGroundActivity::class.java))
+        startActivity(Intent(this@SignInActivity, MainActivity::class.java))
         finish()
     }
 }

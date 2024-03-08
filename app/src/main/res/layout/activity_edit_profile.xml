@@ -62,7 +62,9 @@
             android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:endIconMode="custom"
+            app:endIconDrawable="@layout/custom_end_icon_layout">
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/et_edit_name"
@@ -83,7 +85,9 @@
             android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editNameTextInputLayout">
+            app:layout_constraintTop_toBottomOf="@+id/editNameTextInputLayout"
+            app:endIconMode="custom"
+            app:endIconDrawable="@layout/custom_end_icon_layout">
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/et_edit_birthdate"
@@ -104,7 +108,9 @@
             android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editBirthdateTextInputLayout">
+            app:layout_constraintTop_toBottomOf="@+id/editBirthdateTextInputLayout"
+            app:endIconMode="custom"
+            app:endIconDrawable="@layout/custom_end_icon_layout">
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/et_edit_gender"
@@ -125,7 +131,9 @@
             android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/genderTextInputLayout">
+            app:layout_constraintTop_toBottomOf="@+id/genderTextInputLayout"
+            app:endIconMode="custom"
+            app:endIconDrawable="@layout/custom_end_icon_layout">
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/et_edit_email"
@@ -146,7 +154,9 @@
             android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editEmailTextInputLayout">
+            app:layout_constraintTop_toBottomOf="@+id/editEmailTextInputLayout"
+            app:endIconMode="custom"
+            app:endIconDrawable="@layout/custom_end_icon_layout">
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/et_edit_phone_dumber"
@@ -167,7 +177,9 @@
             android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editPhoneNumberTextInputLayout">
+            app:layout_constraintTop_toBottomOf="@+id/editPhoneNumberTextInputLayout"
+            app:endIconMode="custom"
+            app:endIconDrawable="@layout/custom_end_icon_layout">
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/et_edit_address"
