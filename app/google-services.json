@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "157739588762",
+    "project_id": "paradisoo",
+    "storage_bucket": "paradisoo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:157739588762:android:255cc5dcd2dcf5dbf7d323",
+        "android_client_info": {
+          "package_name": "co.ke.kweyu.paradise"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOLr8fdDRYzmwwZg7p8rQ3kxdJK64crXg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

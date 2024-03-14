@@ -12,7 +12,10 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import co.ke.kweyu.paradise.R
+import co.ke.kweyu.paradise.databinding.DialogProgressBinding
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
+
 open class BaseActivity : AppCompatActivity() {
     private var doubleBackToExitPressedOnce = false
 
@@ -30,24 +33,24 @@ open class BaseActivity : AppCompatActivity() {
      */
 
     fun showProgressDialog(text: String) {
+        val binding = DialogProgressBinding.inflate(layoutInflater)
         mProgressDialog = Dialog(this)
 
-        mProgressDialog.setContentView(R.layout.dialog_progress)
+        mProgressDialog.setContentView(binding.root)
 
-        val tvProgressText: TextView = mProgressDialog.findViewById(R.id.tv_progress_text)
-
-        tvProgressText.text = text
+        binding.tvProgressText.text = text
 
         mProgressDialog.show()
     }
+
 
     fun hideProgressDialog() {
         mProgressDialog.dismiss()
     }
 
-//    fun getCurrentUserID(): String {
-//        return FirebaseAuth.getInstance().currentUser!!.uid
-//    }
+    fun getCurrentUserID(): String {
+        return FirebaseAuth.getInstance().currentUser!!.uid
+    }
 
     fun doubleBackToExit() {
         if (doubleBackToExitPressedOnce) {
@@ -62,7 +65,7 @@ open class BaseActivity : AppCompatActivity() {
             Toast.LENGTH_SHORT
         ).show()
 
-        Handler().postDelayed({ doubleBackToExitPressedOnce = false }, 2000)
+        Handler(mainLooper).postDelayed({ doubleBackToExitPressedOnce = false }, 2000)
     }
 
     fun showErrorSnackBar(message: String) {
@@ -78,6 +81,23 @@ open class BaseActivity : AppCompatActivity() {
         snackBar.show()
     }
 
+//    fun showErrorSnackBar(message: String) {
+//        val binding = ActivityBaseBinding.inflate(layoutInflater)
+//
+//        val snackBar =
+//            Snackbar.make(binding.root, message, Snackbar.LENGTH_LONG)
+//        val snackBarView = snackBar.view
+//
+//        snackBarView.setBackgroundColor(
+//            ContextCompat.getColor(
+//                this@BaseActivity,
+//                R.color.snackbar_error_color
+//            )
+//        )
+//
+//        snackBar.show()
+//    }
+
     fun isValidEmail(email: String): Boolean {
         return Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
@@ -88,9 +108,9 @@ open class BaseActivity : AppCompatActivity() {
     }
 
     fun validateFullInput(value: String): Boolean {
-        val re = Regex("[A-Za-z]{3,30}")
+        val re = Regex("[A-Za-z]{2,30}")
         val arr = value.split(' ')
-        if (arr.size != 2) return false
+        if (arr.size < 2) return false
         val (firstName, lastName) = arr
         return re.matches(firstName) && re.matches(lastName)
     }

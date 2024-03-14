@@ -1,21 +1,29 @@
 package co.ke.kweyu.paradise.activities
 
+import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.WindowInsets
-import android.view.WindowManager
 import android.widget.Button
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import co.ke.kweyu.paradise.databinding.ActivityIntroBinding
 
-class IntroActivity : AppCompatActivity() {
+class IntroActivity : BaseActivity() {
 
     private lateinit var binding: ActivityIntroBinding
     private lateinit var signInIntroBtn: TextView
     private lateinit var signUpIntroBtn: Button
+    private lateinit var introTitle: TextView
+    private lateinit var introText: TextView
+
+
+    private lateinit var pairs: Array<android.util.Pair<View, String>>
+
+    private lateinit var signInIntent:Intent
+    private lateinit var signUpIntent:Intent
+    private lateinit var options: ActivityOptions
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,13 +36,27 @@ class IntroActivity : AppCompatActivity() {
 
         signInIntroBtn = binding.linkSignInIntro
         signUpIntroBtn = binding.btnSignUpIntro
+        introTitle = binding.introTitleTv
+        introText = binding.introTv
 
+        pairs = arrayOf(
+            android.util.Pair(introTitle, "auth_title"),
+            android.util.Pair(introText, "auth_text"),
+            android.util.Pair(signInIntroBtn, "have_don"),
+            android.util.Pair(signUpIntroBtn, "sign_in_sign_up"),
+        )
         signInIntroBtn.setOnClickListener {
-            startActivity(Intent(this@IntroActivity, SignInActivity::class.java))
+
+            signInIntent = Intent(this@IntroActivity, SignInActivity::class.java)
+
+            options = ActivityOptions.makeSceneTransitionAnimation(this@IntroActivity, *pairs)
+            startActivity(signInIntent, options.toBundle())
         }
 
         signUpIntroBtn.setOnClickListener {
-            startActivity(Intent(this@IntroActivity, SignUpActivity::class.java))
+            signUpIntent = Intent(this@IntroActivity, SignUpActivity::class.java)
+            options = ActivityOptions.makeSceneTransitionAnimation(this@IntroActivity, *pairs)
+            startActivity(signUpIntent, options.toBundle())
         }
     }
 

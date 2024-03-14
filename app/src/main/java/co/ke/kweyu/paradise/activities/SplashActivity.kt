@@ -1,5 +1,6 @@
 package co.ke.kweyu.paradise.activities
 
+import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -11,11 +12,16 @@ import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import co.ke.kweyu.paradise.R
 import co.ke.kweyu.paradise.databinding.ActivitySplashBinding
+import co.ke.kweyu.paradise.firebase.FirestoreClass
 
 class SplashActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySplashBinding
     private lateinit var imageView: ImageView
+    private lateinit var introIntent:Intent
+    private lateinit var mainIntent:Intent
+    private lateinit var pair: android.util.Pair<View, String>
+    private lateinit var options: ActivityOptions
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,9 +35,25 @@ class SplashActivity : AppCompatActivity() {
         imageView.startAnimation(topAnim)
 
         Handler(mainLooper).postDelayed({
-            startActivity(Intent(this@SplashActivity, IntroActivity::class.java))
+
+            val currentUserID = FirestoreClass().getCurrentUserID()
+            // Start the Intro Activity
+
+            if (currentUserID.isNotEmpty()) {
+                // Start the Main Activity
+                mainIntent = Intent(this@SplashActivity, MainActivity::class.java)
+                startActivity(mainIntent)
+            } else {
+                // Start the Intro Activity
+                introIntent = Intent(this@SplashActivity, IntroActivity::class.java)
+                pair = android.util.Pair.create(imageView, "logo_image")
+
+                options = ActivityOptions.makeSceneTransitionAnimation(this@SplashActivity, pair)
+                startActivity(introIntent, options.toBundle())
+            }
             finish()
         }, 5000)
+
 
     }
 

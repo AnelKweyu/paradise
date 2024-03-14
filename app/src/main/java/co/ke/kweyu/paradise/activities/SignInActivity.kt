@@ -1,5 +1,6 @@
 package co.ke.kweyu.paradise.activities
 
+import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -9,16 +10,34 @@ import android.view.WindowInsets
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.Toolbar
+import androidx.constraintlayout.widget.ConstraintLayout
 import co.ke.kweyu.paradise.R
 import co.ke.kweyu.paradise.databinding.ActivitySignInBinding
+import co.ke.kweyu.paradise.firebase.FirestoreClass
 import co.ke.kweyu.paradise.models.User
+import com.google.android.material.textfield.TextInputLayout
+import com.google.firebase.auth.FirebaseAuth
 
 class SignInActivity : BaseActivity() {
     private lateinit var binding: ActivitySignInBinding
     private lateinit var toolbar: Toolbar
     private lateinit var linkSignUpLogin: TextView
+    private lateinit var titleAuth: TextView
+    private lateinit var textAuth: TextView
+    private lateinit var emailField: TextInputLayout
+    private lateinit var etEmail: AppCompatEditText
+    private lateinit var passwordField: TextInputLayout
+    private lateinit var etPassword: AppCompatEditText
     private lateinit var btnSignIn: Button
+    private lateinit var googleSignInBtn: ConstraintLayout
+    private lateinit var orGoogleSignInLine: ConstraintLayout
+
+    private lateinit var pairs: Array<android.util.Pair<View, String>>
+    private lateinit var signUpIntent:Intent
+    private lateinit var options: ActivityOptions
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignInBinding.inflate(layoutInflater)
@@ -30,12 +49,33 @@ class SignInActivity : BaseActivity() {
 
         linkSignUpLogin = binding.linkSignUpLogin
         btnSignIn = binding.btnSignIn
+        titleAuth = binding.tvTitle
+        textAuth = binding.tvSignText
+        emailField = binding.emailTextInputLayout
+        passwordField = binding.passwordTextInputLayout
+        googleSignInBtn = binding.signInWithGoogleBtn
+        orGoogleSignInLine = binding.orLine
+
+        pairs = arrayOf(
+            android.util.Pair(titleAuth, "auth_title"),
+            android.util.Pair(textAuth, "auth_text"),
+            android.util.Pair(emailField, "email_name"),
+            android.util.Pair(passwordField, "password_password"),
+            android.util.Pair(googleSignInBtn, "google_sign"),
+            android.util.Pair(orGoogleSignInLine, "or_google"),
+            android.util.Pair(btnSignIn, "have_don"),
+            android.util.Pair(linkSignUpLogin, "sign_in_sign_up")
+        )
+
         btnSignIn.setOnClickListener {
             signInRegisteredUser()
         }
 
         linkSignUpLogin.setOnClickListener {
-            startActivity(Intent(this@SignInActivity, SignUpActivity::class.java))
+
+            signUpIntent = Intent(this@SignInActivity, SignUpActivity::class.java)
+            options = ActivityOptions.makeSceneTransitionAnimation(this@SignInActivity, *pairs)
+            startActivity(signUpIntent, options.toBundle())
         }
     }
 
@@ -66,30 +106,55 @@ class SignInActivity : BaseActivity() {
     }
 
     private fun signInRegisteredUser() {
-        val email: String = binding.etEmail.text.toString().trim { it <= ' ' }
-        val password: String = binding.etPassword.text.toString().trim { it <= ' ' }
-
-        hideSoftKeyboard()
+        etEmail = binding.etEmail
+        etPassword = binding.etPassword
+        val email: String = etEmail.text.toString().trim { it <= ' ' }
+        val password: String = etPassword.text.toString().trim { it <= ' ' }
 
         if (validateForm(email, password)) {
-            val loggedInUser = User(email)
+            // Show the progress dialog.
             showProgressDialog(resources.getString(R.string.please_wait))
-            signInSuccess(loggedInUser)
+
+            // Sign-In using FirebaseAuth
+            FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        // Calling the FirestoreClass signInUser function to get the data of user from database.
+                        FirestoreClass().loadUserData(this@SignInActivity)
+
+                    } else {
+
+                        Toast.makeText(
+                            this@SignInActivity,
+                            task.exception!!.message,
+                            Toast.LENGTH_LONG
+                        ).show()
+                        hideProgressDialog()
+
+                    }
+                }
         }
+
     }
 
+
     private fun validateForm(email: String, password: String): Boolean {
+        etEmail = binding.etEmail
+        etPassword = binding.etPassword
         return when {
             TextUtils.isEmpty(email) -> {
                 showErrorSnackBar("Please enter email.")
+                emailField.error = "Please enter email."
                 false
             }
             !isValidEmail(email) -> {
                 showErrorSnackBar("Please enter valid email.")
+                emailField.error = "Please enter valid email."
                 false
             }
             TextUtils.isEmpty(password) -> {
                 showErrorSnackBar("Please enter password.")
+                passwordField.error = "Please enter password."
                 false
             }
             !isValidPassword(password) -> {
@@ -100,7 +165,7 @@ class SignInActivity : BaseActivity() {
         }
     }
 
-    private fun signInSuccess(user: User) {
+    fun signInSuccess(user: User) {
         Toast.makeText(
             this@SignInActivity,
             "You have successfully Signed In.",

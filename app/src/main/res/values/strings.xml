@@ -88,6 +88,9 @@
     <string name="sell_bat_stock">Sell Bat stock</string>
 
     <string name="wed_6_mar_2024">WED 6 Mar 2024</string>
+    <string name="or_sign_in_with">or sign in with</string>
+    <string name="sign_in_with_google">Sign In with Google</string>
+    <string name="sign_up_with_google">Sign_Up_with_Google</string>
 
 
 </resources>

@@ -42,7 +42,6 @@ class BankAccountInfoActivity : AppCompatActivity() {
         bankAccountAdapter = BankAccountAdapter(bankAccountsArrayList)
         bankAccountRecyclerView.adapter = bankAccountAdapter
     }
-
     private fun setupActionBar() {
         toolbar = binding.toolbarBankAccountInfoActivity.toolbarLayout
         setSupportActionBar(toolbar)
@@ -56,7 +55,6 @@ class BankAccountInfoActivity : AppCompatActivity() {
 
         toolbar.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
     }
-
     private fun bankAccountsDataInitialize() {
         bankAccountsArrayList = arrayListOf()
         bankDetails = arrayOf(
