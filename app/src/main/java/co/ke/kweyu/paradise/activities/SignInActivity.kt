@@ -166,15 +166,14 @@ class SignInActivity : BaseActivity() {
     }
 
     fun signInSuccess(user: User) {
+
+        startActivity(Intent(this@SignInActivity, MainActivity::class.java))
+        hideProgressDialog()
         Toast.makeText(
             this@SignInActivity,
             "You have successfully Signed In.",
             Toast.LENGTH_SHORT
         ).show()
-
-        hideProgressDialog()
-
-        startActivity(Intent(this@SignInActivity, MainActivity::class.java))
         finish()
     }
 }

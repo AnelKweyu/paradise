@@ -6,8 +6,7 @@
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
     <color name="historyGreen">#00B907</color>
-
-
+    <color name="changeEndIconGreen">#31A05F</color>
 
     <color name="primary_text_color">#363A43</color>
     <color name="secondary_text_color">#7A8089</color>

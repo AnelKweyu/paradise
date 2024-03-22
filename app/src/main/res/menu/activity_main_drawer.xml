@@ -1,14 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
-<!--        <item-->
-<!--            android:id="@+id/nav_my_profile"-->
-<!--            android:icon="@drawable/ic_nav_user"-->
-<!--            android:title="@string/nav_my_profile" />-->
-
-<!--        <item-->
-<!--            android:id="@+id/nav_sign_out"-->
-<!--            android:icon="@drawable/ic_nav_sign_out"-->
-<!--            android:title="@string/nav_sign_out" />-->
+        <item android:title="@string/home"
+            android:id="@+id/drawer_home"
+            android:icon="@drawable/ic_home_24dp"/>
+        <item android:title="@string/notification"
+            android:id="@+id/drawer_notification"
+            android:icon="@drawable/ic_notification_24dp"/>
+        <item android:title="@string/search"
+            android:id="@+id/drawer_search"
+            android:icon="@drawable/ic_search_24dp"/>
+        <item android:title="@string/bank_account_info"
+            android:id="@+id/drawer_bank_account"
+            android:icon="@drawable/account_balance"/>
     </group>
+    <item android:title="@string/profile">
+        <menu>
+            <group android:checkableBehavior="single">
+
+                <item android:title="@string/profile"
+                    android:id="@+id/drawer_profile"
+                    android:icon="@drawable/ic_profile_24dp"/>
+                <item
+                    android:id="@+id/drawer_logout"
+                    android:icon="@drawable/logout_ic"
+                    android:title="@string/logout" />
+            </group>
+        </menu>
+    </item>
+    <item android:title="@string/communicate">
+        <menu>
+
+            <group android:checkableBehavior="single">
+            <item
+                android:id="@+id/drawer_share"
+                android:icon="@drawable/ic_share"
+                android:title="@string/share" />
+            <item
+                android:id="@+id/drawer_rate"
+                android:icon="@drawable/rate_review"
+                android:title="@string/rate_us" />
+            </group>>
+        </menu>
+    </item>
 </menu>

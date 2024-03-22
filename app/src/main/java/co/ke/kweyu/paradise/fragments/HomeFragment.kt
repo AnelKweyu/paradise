@@ -20,7 +20,10 @@ import co.ke.kweyu.paradise.models.Guide
 import co.ke.kweyu.paradise.models.Plan
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.GravityCompat
 import co.ke.kweyu.paradise.activities.NotificationActivity
+import co.ke.kweyu.paradise.firebase.FirestoreClass
+import co.ke.kweyu.paradise.models.User
 
 class HomeFragment : Fragment() {
 
@@ -58,13 +61,6 @@ class HomeFragment : Fragment() {
         planCardDataInitialize()
         investmentGuideDataInitialize()
 
-        // Set up toolbar
-        toolbar = binding.toolbarHomeFragment.toolbarLayout
-        (activity as? AppCompatActivity)?.setSupportActionBar(toolbar)
-        (activity as? AppCompatActivity)?.supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        (activity as? AppCompatActivity)?.supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_action_navigation_menu)
-        (activity as? AppCompatActivity)?.supportActionBar?.title = ""
-
         bestPlanRecyclerView = binding.rvBestPlan
         bestPlanRecyclerView.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
@@ -77,9 +73,13 @@ class HomeFragment : Fragment() {
         investmentGuideRecyclerView.setHasFixedSize(true)
         investmentGuideAdapter = InvestmentGuideAdapter(investmentGuidesArrayList)
         investmentGuideRecyclerView.adapter = investmentGuideAdapter
+        FirestoreClass().loadUserData(requireActivity())
 
         return binding.root
     }
+
+
+
 
     private fun planCardDataInitialize() {
         plansArrayList = arrayListOf()
@@ -184,5 +184,13 @@ class HomeFragment : Fragment() {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    fun updateLoggedInUserName(user: User) {
+        val welcomeTv = binding.welcomeTextview
+        val userFullName = user.name
+        val arr = userFullName.split(' ')
+        val (firstName) = arr
+        welcomeTv.text = "Welcome $firstName"
     }
 }

@@ -49,13 +49,6 @@ class AccountFragment : Fragment() {
             binding = FragmentAccountBinding.inflate(inflater, container, false)
             val accountFragmentView = binding.root
 
-            // Set up the toolbar
-            toolbar = binding.toolbarAccountFragment.toolbarLayout
-            (requireActivity() as? AppCompatActivity)?.setSupportActionBar(toolbar)
-            (requireActivity() as? AppCompatActivity)?.supportActionBar?.setDisplayHomeAsUpEnabled(true)
-            (requireActivity() as? AppCompatActivity)?.supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_black_color_back_24dp)
-            (requireActivity() as? AppCompatActivity)?.supportActionBar?.title = ""
-
             // Set up click listeners
             binding.contactInfoBtn.setOnClickListener {
                 startActivity(Intent(requireActivity(), EditProfileActivity::class.java))
@@ -64,7 +57,6 @@ class AccountFragment : Fragment() {
                 startActivity(Intent(requireActivity(), BankAccountInfoActivity::class.java))
             }
 
-            toolbar.setNavigationOnClickListener { requireActivity().onBackPressedDispatcher.onBackPressed()}
 
             return accountFragmentView
         }

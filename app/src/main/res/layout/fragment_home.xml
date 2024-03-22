@@ -8,13 +8,6 @@
     android:background="#F6F6F9"
     tools:context=".fragments.HomeFragment">
 
-    <include
-        android:id="@+id/toolbarHomeFragment"
-        layout="@layout/top_toolbar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -22,7 +15,7 @@
         android:fillViewport="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarHomeFragment">
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -166,17 +159,19 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView_best_plans">
+
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_best_plan"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:listitem="@layout/item_best_plan_card"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         />
-
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -220,7 +215,8 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:listitem="@layout/item_investment_guide"/>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
